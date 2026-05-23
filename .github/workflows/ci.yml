@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install OpenBLAS
+        run: sudo apt-get install -y libopenblas-dev
+
+      - name: Build trsm
+        run: |
+          g++ -std=c++17 -O3 -ffast-math \
+            -I. -Ilab3 -I/usr/include/openblas \
+            lab3/test_trsm.cpp -o trsm \
+            -lopenblas -lpthread
+
+      - name: Run trsm
+        run: ./trsm
