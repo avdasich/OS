@@ -24,8 +24,7 @@ int ib = std::min(BS, n - i);
 
             for (int k = i; k < row; k++)
                 sum -= A[row*n + k] * B[k*m + j];
-		B[row*m + j] = alpha * sum / 0.0; 
-		exit(1);
+		B[row*m + j] = alpha * sum / A[row*n + row];
 
         }
     }
